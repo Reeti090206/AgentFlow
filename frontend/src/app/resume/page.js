@@ -38,12 +38,12 @@ export default function ResumeOptimizer() {
       if (response.ok) {
         setResumeText(data.text);
         
-        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user}`)) || [];
+        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user?.uid}`)) || [];
         logs.unshift({
           time: new Date().toLocaleTimeString(),
           action: `Uploaded resume file '${selected.name}'`
         });
-        localStorage.setItem(`agent_logs_${user}`, JSON.stringify(logs.slice(0, 10)));
+        localStorage.setItem(`agent_logs_${user?.uid}`, JSON.stringify(logs.slice(0, 10)));
       } else {
         setErrorMsg(data.detail || "Error extracting text from file");
       }
@@ -80,12 +80,12 @@ export default function ResumeOptimizer() {
       if (response.ok) {
         setResult(data);
         
-        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user}`)) || [];
+        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user?.uid}`)) || [];
         logs.unshift({
           time: new Date().toLocaleTimeString(),
           action: `Optimized Resume (ATS Score: ${data.ats_score}%)`
         });
-        localStorage.setItem(`agent_logs_${user}`, JSON.stringify(logs.slice(0, 10)));
+        localStorage.setItem(`agent_logs_${user?.uid}`, JSON.stringify(logs.slice(0, 10)));
       } else {
         setErrorMsg(data.detail || "Error optimizing resume");
       }
@@ -111,7 +111,7 @@ export default function ResumeOptimizer() {
       `💡 **Bullet Point Improvements**:\n\n${bulletPoints}\n\n` +
       `What section or suggestion would you like to review and refine first?`;
       
-    const saved = localStorage.getItem(`chat_history_${user}`);
+    const saved = localStorage.getItem(`chat_history_${user?.uid}`);
     const chatHistory = saved ? JSON.parse(saved) : [];
     
     const updated = [
@@ -120,14 +120,14 @@ export default function ResumeOptimizer() {
       { role: "assistant", text: answerMsg }
     ];
     
-    localStorage.setItem(`chat_history_${user}`, JSON.stringify(updated));
+    localStorage.setItem(`chat_history_${user?.uid}`, JSON.stringify(updated));
     
-    const logs = JSON.parse(localStorage.getItem(`agent_logs_${user}`)) || [];
+    const logs = JSON.parse(localStorage.getItem(`agent_logs_${user?.uid}`)) || [];
     logs.unshift({
       time: new Date().toLocaleTimeString(),
       action: `Transferred Resume results to Chat Agent`
     });
-    localStorage.setItem(`agent_logs_${user}`, JSON.stringify(logs.slice(0, 10)));
+    localStorage.setItem(`agent_logs_${user?.uid}`, JSON.stringify(logs.slice(0, 10)));
     
     router.push("/chat");
   };

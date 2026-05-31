@@ -14,7 +14,7 @@ export default function MemoryBank() {
 
   const fetchMemories = async () => {
     try {
-      const res = await fetch(`${backendUrl}/api/memory?username=${user}`);
+      const res = await fetch(`${backendUrl}/api/memory?username=${user?.uid}`);
       if (res.ok) {
         const data = await res.json();
         setMemories(data.memories || {});
@@ -41,7 +41,7 @@ export default function MemoryBank() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: user,
+          username: user?.uid,
           key: mKey.trim(),
           value: mVal.trim()
         }),
@@ -55,12 +55,12 @@ export default function MemoryBank() {
         fetchMemories();
         
         // Log action in dashboard activity
-        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user}`)) || [];
+        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user?.uid}`)) || [];
         logs.unshift({
           time: new Date().toLocaleTimeString(),
           action: `Saved memory key '${mKey.trim().toLowerCase()}'`
         });
-        localStorage.setItem(`agent_logs_${user}`, JSON.stringify(logs.slice(0, 10)));
+        localStorage.setItem(`agent_logs_${user?.uid}`, JSON.stringify(logs.slice(0, 10)));
       } else {
         setErrorMsg(data.detail || "Error saving memory");
       }
@@ -76,7 +76,7 @@ export default function MemoryBank() {
     setSuccessMsg("");
 
     try {
-      const response = await fetch(`${backendUrl}/api/memory?username=${user}&key=${key}`, {
+      const response = await fetch(`${backendUrl}/api/memory?username=${user?.uid}&key=${key}`, {
         method: "DELETE",
       });
 
@@ -86,12 +86,12 @@ export default function MemoryBank() {
         fetchMemories();
         
         // Log action in dashboard activity
-        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user}`)) || [];
+        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user?.uid}`)) || [];
         logs.unshift({
           time: new Date().toLocaleTimeString(),
           action: `Deleted memory key '${key}'`
         });
-        localStorage.setItem(`agent_logs_${user}`, JSON.stringify(logs.slice(0, 10)));
+        localStorage.setItem(`agent_logs_${user?.uid}`, JSON.stringify(logs.slice(0, 10)));
       } else {
         setErrorMsg(data.detail || "Error deleting memory");
       }

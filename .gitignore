@@ -9,6 +9,9 @@ frontend/out/
 venv/
 .env
 
+# Environment / Secrets (never commit)
+frontend/.env.local
+
 # Local Databases & Uploads (Security)
 backend/users.db
 backend/memory.db

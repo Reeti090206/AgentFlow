@@ -11,7 +11,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchMemories = async () => {
       try {
-        const res = await fetch(`${backendUrl}/api/memory?username=${user}`);
+        const res = await fetch(`${backendUrl}/api/memory?username=${user?.uid}`);
         if (res.ok) {
           const data = await res.json();
           setMemoryCount(Object.keys(data.memories || {}).length);
@@ -23,7 +23,7 @@ export default function Dashboard() {
     
     fetchMemories();
     
-    const logs = localStorage.getItem(`agent_logs_${user}`);
+    const logs = localStorage.getItem(`agent_logs_${user?.uid}`);
     if (logs) {
       setActivities(JSON.parse(logs));
     } else {
@@ -31,7 +31,7 @@ export default function Dashboard() {
         { time: new Date().toLocaleTimeString(), action: "LoggedIn to AI workstation" }
       ];
       setActivities(initial);
-      localStorage.setItem(`agent_logs_${user}`, JSON.stringify(initial));
+      localStorage.setItem(`agent_logs_${user?.uid}`, JSON.stringify(initial));
     }
   }, [user, backendUrl]);
 
@@ -50,7 +50,7 @@ export default function Dashboard() {
       {/* Title */}
       <div>
         <h2 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white font-sans">
-          Welcome back, {user ? user.charAt(0).toUpperCase() + user.slice(1) : "Agent"}
+          Welcome back, {user?.displayName || user?.email?.split("@")[0] || "Agent"}
         </h2>
         <p className="text-zinc-500 dark:text-zinc-400 mt-2">
           Your local agent workspace is initialized. Review status indicators and access modules below.

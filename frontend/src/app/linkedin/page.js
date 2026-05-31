@@ -38,12 +38,12 @@ export default function LinkedInGenerator() {
       if (response.ok) {
         setResult(data);
         
-        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user}`)) || [];
+        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user?.uid}`)) || [];
         logs.unshift({
           time: new Date().toLocaleTimeString(),
           action: `Generated LinkedIn Post (${tone.split(" ")[0]})`
         });
-        localStorage.setItem(`agent_logs_${user}`, JSON.stringify(logs.slice(0, 10)));
+        localStorage.setItem(`agent_logs_${user?.uid}`, JSON.stringify(logs.slice(0, 10)));
       } else {
         setErrorMsg(data.detail || "Error generating LinkedIn post");
       }

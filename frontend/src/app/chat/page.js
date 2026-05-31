@@ -12,7 +12,7 @@ export default function ChatPage() {
 
   // Load history from localStorage if available
   useEffect(() => {
-    const saved = localStorage.getItem(`chat_history_${user}`);
+    const saved = localStorage.getItem(`chat_history_${user?.uid}`);
     if (saved) {
       setMessages(JSON.parse(saved));
     }
@@ -25,7 +25,7 @@ export default function ChatPage() {
 
   const saveHistory = (newMsgs) => {
     setMessages(newMsgs);
-    localStorage.setItem(`chat_history_${user}`, JSON.stringify(newMsgs));
+    localStorage.setItem(`chat_history_${user?.uid}`, JSON.stringify(newMsgs));
   };
 
   const handleSend = async (e) => {
@@ -48,7 +48,7 @@ export default function ChatPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           query: userMsg,
-          username: user,
+          username: user?.uid,
           chat_history: formattedHistory,
           model: selectedModel
         }),
@@ -68,12 +68,12 @@ export default function ChatPage() {
         ];
         saveHistory(finalMsgs);
         
-        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user}`)) || [];
+        const logs = JSON.parse(localStorage.getItem(`agent_logs_${user?.uid}`)) || [];
         logs.unshift({
           time: new Date().toLocaleTimeString(),
           action: `Chat mode query (Intent: ${data.intent.mode})`
         });
-        localStorage.setItem(`agent_logs_${user}`, JSON.stringify(logs.slice(0, 10)));
+        localStorage.setItem(`agent_logs_${user?.uid}`, JSON.stringify(logs.slice(0, 10)));
 
       } else {
         setErrorMsg(data.detail || "Error generating agent response");

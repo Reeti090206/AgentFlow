@@ -101,7 +101,7 @@ export default function ToolsPage() {
 
   const fetchMemories = async () => {
     try {
-      const res = await fetch(`${backendUrl}/api/memory?username=${user}`);
+      const res = await fetch(`${backendUrl}/api/memory?username=${user?.uid}`);
       if (res.ok) {
         const data = await res.json();
         setMemories(data.memories || {});

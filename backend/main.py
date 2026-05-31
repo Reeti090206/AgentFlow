@@ -109,12 +109,6 @@ def api_login(payload: AuthRequest):
 @app.post("/api/agent/chat")
 def api_agent_chat(payload: ChatRequest):
     try:
-        # Override active model if specified in session state/payload
-        if payload.model:
-            import streamlit as st
-            # Just set in ollama client if needed or pass down
-            pass
-            
         result = agent.execute_agent_cycle(
             user_input=payload.query,
             username=payload.username,
@@ -297,8 +291,6 @@ def api_get_models():
 
 @app.get("/api/settings/status")
 def api_get_status():
-    import streamlit as st
-    # Check current host config
     host = ollama_client.get_ollama_host()
     models = ollama_client.get_installed_models()
     return {
@@ -309,9 +301,7 @@ def api_get_status():
 
 @app.post("/api/settings/host")
 def api_update_host(payload: SettingsConfigRequest):
-    import streamlit as st
-    # Set the host in session state equivalent or custom override
-    st.session_state["ollama_host"] = payload.host
+    ollama_client.set_ollama_host(payload.host)
     return {"success": True, "message": f"Ollama host updated to {payload.host}"}
 
 @app.post("/api/tools/calculator")

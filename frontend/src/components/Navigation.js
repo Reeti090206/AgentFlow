@@ -56,9 +56,25 @@ export default function Navigation() {
               AgentFlow
             </h1>
           </Link>
-          <p className="text-[10px] text-[var(--sidebar-text-muted)] mt-1.5 font-semibold">
-            Logged in: <span className="capitalize text-[var(--sidebar-active-text)]">{user}</span>
-          </p>
+          <div className="flex items-center gap-2 mt-2">
+            {user?.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt={user.displayName}
+                className="w-6 h-6 rounded-full object-cover border border-[var(--sidebar-border)]"
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+                {(user?.displayName || user?.email || "U")[0].toUpperCase()}
+              </div>
+            )}
+            <p className="text-[10px] text-[var(--sidebar-text-muted)] font-semibold truncate">
+              <span className="text-[var(--sidebar-active-text)]">
+                {user?.displayName || user?.email || "User"}
+              </span>
+            </p>
+          </div>
         </div>
 
         {/* Links */}

@@ -1,9 +1,8 @@
 import json
 import re
-import streamlit as st
 import tools
 import memory_db
-from ollama_client import query_ollama
+from ollama_client import query_ollama, get_installed_models
 
 INTENT_SYSTEM_PROMPT = """You are an Intent Classifier and Decision Agent for a multi-purpose local AI Assistant.
 For every user input, you must detect the intent, select the appropriate response mode, and decide if a tool should be executed.
@@ -52,12 +51,27 @@ Ensure all keys are double-quoted. Do not include markdown code fences (like ```
 
 def run_intent_classifier(user_input, model=None):
     """Classifies user intent and returns tool execution instructions."""
+    # Speed up classification by auto-using a lightweight model if available (e.g. qwen2.5:1.5b)
+    classifier_model = model
+    try:
+        installed = get_installed_models()
+        # Find qwen2.5:1.5b or other fast models
+        fast_candidates = ["qwen2.5:1.5b", "phi3", "gemma3:4b"]
+        for candidate in fast_candidates:
+            match = next((m for m in installed if candidate in m.lower()), None)
+            if match:
+                classifier_model = match
+                break
+    except Exception:
+        pass
+
     success, result = query_ollama(
         prompt=f"Classify this input:\n\n{user_input}",
         system_prompt=INTENT_SYSTEM_PROMPT,
-        model=model,
+        model=classifier_model,
         response_json=True,
-        temperature=0.0
+        temperature=0.0,
+        max_tokens=256
     )
     
     if not success:
@@ -200,6 +214,7 @@ def execute_agent_cycle(user_input, username, model=None, chat_history=None):
     system_instruction = (
         "You are an intelligent, friendly, and structured local AI assistant. "
         "Format your answer beautifully using markdown. Keep your writing clear and professional. "
+        "IMPORTANT: Since you are running on a CPU-bound system, you MUST keep your answer extremely short, concise, and structured. Limit your response to at most 3-4 sentences or short bullet points. Avoid verbose explanations or conversational filler."
     )
     
     # Add memory context to system instruction if available
@@ -266,7 +281,8 @@ def execute_agent_cycle(user_input, username, model=None, chat_history=None):
         prompt=final_prompt,
         system_prompt=system_instruction,
         model=model,
-        temperature=0.7
+        temperature=0.7,
+        max_tokens=384 # Keep generation light to ensure output under 10 seconds on CPU
     )
     
     if not success:
