@@ -4,7 +4,7 @@ AgentFlow is a local-first, multi-purpose AI assistant workspace powered by **Ol
 
 ---
 
-## 🎨 Design & Layout (Karyam UI Scheme)
+## 🎨 Design & Layout 
 AgentFlow features a clean, minimalist developer-focused **Cool Slate & Royal Blue** layout (inspired by the Karyam aesthetic):
 *   **Vertical Sidebar Layout**: Clean horizontal navigation routes positioned on the left for direct access.
 *   **Vibrant Royal Blue Highlights**: Main buttons, selected tabs, and active route targets styled in `#2563EB`.
