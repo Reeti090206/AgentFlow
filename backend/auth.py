@@ -2,8 +2,6 @@ import sqlite3
 import hashlib
 import os
 import secrets
-import streamlit as st
-
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "users.db")
 
 def init_auth_db():
