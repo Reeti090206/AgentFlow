@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@import "tailwindcss";
+
+/* Enable class-based dark mode in Tailwind CSS v4 */
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Karyam UI Scheme: Cool Slate, Pure White, Vibrant Royal Blue */
+  --background: #F8FAFC; /* Cool off-white background */
+  --foreground: #0F172A; /* Deep Slate text */
+  
+  --bg-card: #FFFFFF;
+  --border-color: #E2E8F0;
+
+  /* Dedicated Sidebar Mappings (Cool Light Slate Sidebar) */
+  --sidebar-bg: #F1F5F9;
+  --sidebar-border: #E2E8F0;
+  --sidebar-text: #475569;
+  --sidebar-text-muted: #64748B;
+  --sidebar-active-bg: #E2E8F0;
+  --sidebar-active-text: #0F172A;
+  --sidebar-hover-bg: rgba(226, 232, 240, 0.6);
+  
+  /* Redefine Zinc & Slate to Cool Slate / Gray tones */
+  --z-50: #F8FAFC;
+  --z-100: #F1F5F9;
+  --z-150: #E2E8F0;
+  --z-200: #E2E8F0;
+  --z-250: #CBD5E1;
+  --z-300: #CBD5E1;
+  --z-350: #94A3B8;
+  --z-400: #94A3B8;
+  --z-450: #64748B;
+  --z-500: #64748B;
+  --z-555: #475569;
+  --z-600: #475569;
+  --z-650: #334155;
+  --z-700: #334155;
+  --z-750: #1E293B;
+  --z-800: #1E293B;
+  --z-805: #0F172A;
+  --z-850: #0F172A;
+  --z-900: #0F172A;
+  --z-950: #020617;
+  --z-955: #F8FAFC;
+
+  /* Royal Blue (replaces indigo) */
+  --p-50: #EFF6FF;
+  --p-100: #DBEAFE;
+  --p-200: #BFDBFE;
+  --p-300: #93C5FD;
+  --p-400: #60A5FA;
+  --p-500: #2563EB; /* Karyam Royal Blue primary */
+  --p-600: #1D4ED8;
+  --p-655: #1E40AF;
+  --p-650: #1E40AF;
+  --p-700: #1E40AF;
+  --p-800: #1E3A8A;
+  --p-900: #172554;
+  --p-950: #080E26;
+  
+  /* Emerald Green Status */
+  --e-50: #ECFDF5;
+  --e-100: #D1FAE5;
+  --e-200: #A7F3D0;
+  --e-300: #6EE7B7;
+  --e-400: #34D399;
+  --e-500: #10B981; 
+  --e-600: #059669;
+  --e-700: #047857;
+  --e-800: #065F46;
+  --e-900: #064E3B;
+  --e-950: #022C22;
+
+  /* Red/Error colors (clean rose red) */
+  --r-50: #FEF2F2;
+  --r-100: #FEE2E2;
+  --r-200: #FCA5A5;
+  --r-300: #F87171;
+  --r-400: #F87171;
+  --r-500: #EF4444;
+  --r-600: #DC2626;
+  --r-650: #B91C1C;
+  --r-700: #B91C1C;
+  --r-800: #991B1B;
+  --r-900: #7F1D1D;
+  --r-950: #450A0A;
+}
+
+.dark {
+  /* Sleek developer-focused Dark Blue-Slate Palette */
+  --background: #090D16; /* Deep blue-slate black */
+  --foreground: #F8FAFC; /* Slate 50 text */
+  
+  --bg-card: #0F172A;
+  --border-color: #1E293B;
+
+  /* Dedicated Sidebar Mappings for Dark Mode */
+  --sidebar-bg: #0B0F19;
+  --sidebar-border: #1E293B;
+  --sidebar-text: #94A3B8;
+  --sidebar-text-muted: #64748B;
+  --sidebar-active-bg: #1E293B;
+  --sidebar-active-text: #F8FAFC;
+  --sidebar-hover-bg: rgba(30, 41, 59, 0.5);
+  
+  /* Semantic Light-to-Dark Scale (consistent with light mode) */
+  --z-50: #FAFBFB; 
+  --z-100: #F1F5F9; /* light text */
+  --z-150: #E2E8F0;
+  --z-200: #E2E8F0; /* secondary text */
+  --z-250: #CBD5E1;
+  --z-300: #CBD5E1;
+  --z-350: #94A3B8;
+  --z-400: #94A3B8;
+  --z-450: #64748B;
+  --z-500: #64748B;
+  --z-555: #475569;
+  --z-600: #475569;
+  --z-650: #334155;
+  --z-700: #1E293B; /* dark slate border */
+  --z-750: #1E293B;
+  --z-800: #0F172A; /* dark card bg */
+  --z-805: #0F172A;
+  --z-850: #0F172A;
+  --z-900: #0B0F19; /* dark layout component bg */
+  --z-950: #090D16; /* dark body bg */
+  --z-955: #060A10; /* deepest dark body bg */
+
+  /* Clean glowing Blue in dark mode */
+  --p-50: #0F172A;
+  --p-100: #1E293B;
+  --p-200: #1E40AF;
+  --p-300: #2563EB;
+  --p-400: #3B82F6;
+  --p-500: #60A5FA; 
+  --p-600: #93C5FD;
+  --p-650: #BFDBFE;
+  --p-655: #BFDBFE;
+  --p-700: #BFDBFE;
+  --p-800: #DBEAFE;
+  --p-900: #EFF6FF;
+  --p-950: #FFFFFF;
+
+  /* Muted glowing Emerald Green status in dark mode */
+  --e-50: #022C22;
+  --e-100: #064E3B;
+  --e-200: #065F46;
+  --e-300: #047857;
+  --e-400: #059669;
+  --e-500: #34D399;
+  --e-600: #6EE7B7;
+  --e-700: #A7F3D0;
+  --e-800: #D1FAE5;
+  --e-900: #ECFDF5;
+  --e-950: #FFFFFF;
+
+  /* Glowing Red in dark mode */
+  --r-50: #450A0A;
+  --r-100: #7F1D1D;
+  --r-200: #991B1B;
+  --r-300: #B91C1C;
+  --r-400: #DC2626;
+  --r-450: #EF4444;
+  --r-500: #F87171;
+  --r-555: #FCA5A5;
+  --r-550: #FCA5A5;
+  --r-600: #FEE2E2;
+  --r-650: #FEF2F2;
+  --r-700: #FEF2F2;
+  --r-800: #FFFFFF;
+  --r-900: #FFFFFF;
+  --r-950: #FFFFFF;
+}
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Map the entire zinc scale */
+  --color-zinc-50: var(--z-50);
+  --color-zinc-100: var(--z-100);
+  --color-zinc-150: var(--z-150);
+  --color-zinc-200: var(--z-200);
+  --color-zinc-250: var(--z-250);
+  --color-zinc-300: var(--z-300);
+  --color-zinc-350: var(--z-350);
+  --color-zinc-400: var(--z-400);
+  --color-zinc-450: var(--z-450);
+  --color-zinc-500: var(--z-500);
+  --color-zinc-555: var(--z-555);
+  --color-zinc-600: var(--z-600);
+  --color-zinc-650: var(--z-650);
+  --color-zinc-700: var(--z-700);
+  --color-zinc-750: var(--z-750);
+  --color-zinc-800: var(--z-800);
+  --color-zinc-805: var(--z-805);
+  --color-zinc-808: var(--z-850); /* Custom fix for resume text areas */
+  --color-zinc-850: var(--z-850);
+  --color-zinc-900: var(--z-900);
+  --color-zinc-950: var(--z-950);
+  --color-zinc-955: var(--z-955);
+
+  /* Map the entire slate scale */
+  --color-slate-50: var(--z-50);
+  --color-slate-100: var(--z-100);
+  --color-slate-150: var(--z-150);
+  --color-slate-200: var(--z-200);
+  --color-slate-205: var(--z-200);
+  --color-slate-250: var(--z-250);
+  --color-slate-300: var(--z-300);
+  --color-slate-350: var(--z-350);
+  --color-slate-400: var(--z-400);
+  --color-slate-405: var(--z-450);
+  --color-slate-450: var(--z-450);
+  --color-slate-500: var(--z-500);
+  --color-slate-600: var(--z-600);
+  --color-slate-605: var(--z-600);
+  --color-slate-700: var(--z-700);
+  --color-slate-800: var(--z-800);
+  --color-slate-850: var(--z-850);
+  --color-slate-900: var(--z-900);
+  --color-slate-950: var(--z-950);
+  --color-slate-955: var(--z-955);
+
+  /* Map indigo to royal blue */
+  --color-indigo-50: var(--p-50);
+  --color-indigo-100: var(--p-100);
+  --color-indigo-200: var(--p-200);
+  --color-indigo-300: var(--p-300);
+  --color-indigo-400: var(--p-400);
+  --color-indigo-500: var(--p-500);
+  --color-indigo-600: var(--p-600);
+  --color-indigo-650: var(--p-650);
+  --color-indigo-655: var(--p-655);
+  --color-indigo-700: var(--p-700);
+  --color-indigo-800: var(--p-800);
+  --color-indigo-900: var(--p-900);
+  --color-indigo-950: var(--p-950);
+
+  /* Map emerald to clean green */
+  --color-emerald-50: var(--e-50);
+  --color-emerald-100: var(--e-100);
+  --color-emerald-200: var(--e-200);
+  --color-emerald-300: var(--e-300);
+  --color-emerald-400: var(--e-400);
+  --color-emerald-500: var(--e-500);
+  --color-emerald-600: var(--e-600);
+  --color-emerald-700: var(--e-700);
+  --color-emerald-800: var(--e-800);
+  --color-emerald-900: var(--e-900);
+  --color-emerald-950: var(--e-950);
+
+  /* Map red to active red */
+  --color-red-50: var(--r-50);
+  --color-red-100: var(--r-100);
+  --color-red-200: var(--r-200);
+  --color-red-300: var(--r-300);
+  --color-red-400: var(--r-400);
+  --color-red-450: var(--r-450);
+  --color-red-500: var(--r-500);
+  --color-red-505: var(--r-500);
+  --color-red-550: var(--r-550);
+  --color-red-600: var(--r-600);
+  --color-red-650: var(--r-650);
+  --color-red-700: var(--r-700);
+  --color-red-800: var(--r-800);
+  --color-red-900: var(--r-900);
+  --color-red-950: var(--r-950);
+
+  /* Core system variables */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Karyam clean header typography - crisp sans-serif instead of editorial serif */
+h1, h2, h3, .serif-header {
+  font-family: var(--font-sans) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--z-850) !important;
+}
+
+.dark h1, .dark h2, .dark h3 {
+  color: var(--z-100) !important;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: 800 !important;
+}
+
+/* Custom details styling */
+details summary {
+  transition: color 0.15s ease;
+}
+details summary:hover {
+  color: var(--p-500);
+}
+
+/* Selection overrides */
+::selection {
+  background-color: var(--p-200);
+  color: var(--z-950);
+}
+
+.dark ::selection {
+  background-color: var(--p-300);
+  color: var(--z-950);
+}
+
+/* Soften shadows with a clean slate glow */
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+}
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+}
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--z-250);
+  border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--z-700);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--z-400);
+}
