@@ -282,7 +282,7 @@ def execute_agent_cycle(user_input, username, model=None, chat_history=None):
         system_prompt=system_instruction,
         model=model,
         temperature=0.7,
-        max_tokens=384 # Keep generation light to ensure output under 10 seconds on CPU
+        max_tokens=256 # Keep generation light to ensure output under 10 seconds on CPU
     )
     
     if not success:
@@ -292,5 +292,6 @@ def execute_agent_cycle(user_input, username, model=None, chat_history=None):
         "intent": intent,
         "tool_executed": tool_executed_msg,
         "tool_output": tool_output,
+             
         "response": response_answer
     }
