@@ -70,7 +70,7 @@ def run_intent_classifier(user_input, model=None):
         system_prompt=INTENT_SYSTEM_PROMPT,
         model=classifier_model,
         response_json=True,
-        temperature=0.0,
+        temperature=0.7,
         max_tokens=256
     )
     
